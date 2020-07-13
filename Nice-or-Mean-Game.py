@@ -2,7 +2,7 @@
 Python:     3.8.2
 Author:     Carol Schultz
 Purpose:    The Tech Academy - Python Course.  Creating our first program together.
-                    Demonstrating how to pass variables from ffunction to function
+                    Demonstrating how to pass variables from function to function
                     while producing a functional game.
 
                     Remember, function_name(variable) _;means that we pass in the variable.
