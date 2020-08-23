@@ -1,41 +1,55 @@
+#  Program to allow users to change web page message
+
+# Importing tkinter module 
 from tkinter import *
-from tkinter.ttk import *
+  
+# define root window
+root = Tk()
 
-class ParentWindow(Frame):
-    def __init__ (self, master):
-        Frame.__init__ (self)
+# set windows elements
+root.title('Update message')
+root.resizable(width=True, height=True)
+root.geometry('650x200')
 
-        self.master = master
-        self.master.resizable(width=True, height=True)
-        self.master.geometry("600x200")
-        self.master.title("Update web message")
-        self.master.config(bg="#333")
+# declare string variable for storing name
+msg_var = StringVar() 
 
-        self.entry_field_variable = StringVar()
-
-        self.labelMsg = Label(self.master, width= 20, text="Enter the message:", font = ("Helvetica", 16))
-        self.labelMsg.grid(row=0, column=0, padx=10, pady=20, sticky = "W")
-        self.entryInput = Entry(self.master, width=48, textvariable = self.entry_field_variable, font = ("Helvetica", 16))
-        self.entryInput.grid(row=1, column=0, padx=10, pady=5, sticky = "WENS")
-        
-        #self.btnQuit = Button(self.master, width=10, text="Quit", command = self.master.destroy)
-        #self.btnQuit.grid(row=2, column=0, padx=10, pady=20, sticky = "W")
-        self.btnSave = Button(self.master, width=10, text="Save", command = save(self))
-        self.btnSave.grid(row=2, column=1, padx=40, pady=20, sticky = "W")
-        
-        
-
-def save(self):
-    preMsg = "<html><body>"
-    postMsg = "<html><body>"
-    inp = self.entryInput.get()
+# define a function that will get the name and print it on the screen
+def submit():
+    msg = msg_entry.get()
+    mylist =  ["<html><body>\n", msg,"\n<html><body>"]
+    f = open("newwebpage.html", "w")
+    f.writelines(mylist)
+    f.close()
     
-    f = "newwebpage.html"
-    with open(f, 'w'):
-        f.write(preMsg + inp + postMsg)
-        f.close()
+    # Checking if the data is written to file or not 
+    f = open("newwebpage.html", "r")
+    print(f.read()) 
+    f.close()
 
+    # reset variable
+    msg_var.set("") 
+      
+# creating a label for  name using widget Label 
+msg_label = Label(root, text = 'Type your new message:', 
+                   font=('calibre', 12, 'bold')) 
+   
+# creating an entry for input  name using widget Entry
+msg_entry = Entry(root, textvariable = msg_var, width=80,
+                   font=('calibre',10,'normal')) 
+   
+# creating a button using the widget Button that will call the submit function  
+sub_btn = Button(root,text = 'Submit', width=10, bg="#8bed4f",
+                 command = submit)
+quit_btn = Button(root, text = 'Quit', width=10, bg="#333", fg="white",
+                  command = root.destroy) 
+   
+# placing the label and entry in the required position using grid method 
+msg_label.grid(row=0, column=0, padx=10, pady=10, sticky = "W", columnspan = 2) 
+msg_entry.grid(row=1, column=0, padx=10, pady=5, sticky = "WENS", columnspan = 2)
+sub_btn.grid(row=2, column=0, padx=20, pady=20, sticky = "W")
+quit_btn.grid(row=2, column=0, padx=0, pady=20) 
+   
+# performing an infinite loop for the window to display 
 if __name__ == '__main__':
-    root = Tk()
-    app = ParentWindow(root)
     root.mainloop()
