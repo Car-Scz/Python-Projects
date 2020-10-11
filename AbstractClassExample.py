@@ -1,83 +1,31 @@
+#  Python program showing Abstract Class coding use
 from abc import ABC, abstractmethod
 
-class Image(ABC):
-    def __init__(self, value):
-        self.value = value
-        super().__init__()
-
-    @abstractmethod                                                                                                                        
-    def load_image(self, filename):
-        pass
-        
+class Absclass(ABC):
+    def print(self,value):
+        print("Passed value: ", value)
     @abstractmethod
-    def save_image(self, filename):
-        pass
+    def task(self):
+        print("...inside Abstract class task")
+ 
+class polygon_class(Absclass): 
+    def task(self):
+        print("\n...inside Parent polygon_class  task")
 
-# Sub class BITMAP
-class Bitmap(Image):
-    def load_image(self,filename):
-        print('loading bitmap')
-
-    def save_image(self,filename):
-        print('save bitmap')
-
-#  Sub class JPEG
-class Jpeg(Image):
-    def load_image(self,filename):
-        print('loading jpeg')
-
-    def save_image(self,filename):
-        print('saving jpeg')
-
+class hexagon_class(polygon_class): 
+    def task(self):
+        print("\n...inside Child hexagon_class task")
+  
 if __name__ == "__main__":
-    img = Bitmap()
-    img.load_image(img_1234.bmp)
+ 
+        #  object of polygon_class created
+        polygon_obj = polygon_class()
+        polygon_obj.task()
+        polygon_obj.print('I have variable sides')
+        print("\npolygon_obj is instance of Absclass? ", isinstance(polygon_obj, Absclass))
 
-
-# Python program showing 
-# abstract base class work 
-
-from abc import ABC, abstractmethod 
-
-class Polygon(ABC): 
-
-	# abstract method 
-	def noofsides(self): 
-		pass
-
-class Triangle(Polygon): 
-
-	# overriding abstract method 
-	def noofsides(self): 
-		print("I have 3 sides") 
-
-class Pentagon(Polygon): 
-
-	# overriding abstract method 
-	def noofsides(self): 
-		print("I have 5 sides") 
-
-class Hexagon(Polygon): 
-
-	# overriding abstract method 
-	def noofsides(self): 
-		print("I have 6 sides") 
-
-class Quadrilateral(Polygon): 
-
-	# overriding abstract method 
-	def noofsides(self): 
-		print("I have 4 sides") 
-
-# Driver code 
-R = Triangle() 
-R.noofsides() 
-
-K = Quadrilateral() 
-K.noofsides() 
-
-R = Pentagon() 
-R.noofsides() 
-
-K = Hexagon() 
-K.noofsides() 
+        #  object of hexagon_class created
+        hexagon_obj = hexagon_class()
+        hexagon_obj.task()
+        hexagon_obj.print('I have 6 sides')
+        print("\nhexagon_obj is instance of Absclass? ", isinstance(hexagon_obj, Absclass))
